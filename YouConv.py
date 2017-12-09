@@ -39,8 +39,10 @@ class MainWindow(wx.Frame):
 		test = self.url_ctrl.GetValue()
 		def TestMe(test):
 			yt = YouTube(test)
-			raw_title = yt.title.split()
-			title = '"%s"' % (yt.title)
+			raw_title = yt.title
+			raw_title = raw_title.translate({ord(x): None for x in ".'"})
+			
+			title = '"%s"' % (raw_title)
 			
 			yt.streams.filter(progressive=True, file_extension = 'mp4').first().download("Videos")
 			
