@@ -2,7 +2,18 @@ from pytube import YouTube
 import wx
 import subprocess
 import threading
+import os
 
+if os.access("Videos", os.R_OK):
+	pass
+else:
+	os.makedirs("Videos")
+
+if os.access("AudioFiles", os.R_OK):
+	pass
+else:
+	os.makedirs("AudioFiles")
+	
 class MainWindow(wx.Frame):
 	def __init__(self, parent, title):
 		wx.Frame.__init__(self, parent, title=title, size = (300,100), style = wx.DEFAULT_FRAME_STYLE)
